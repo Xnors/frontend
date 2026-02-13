@@ -9,4 +9,12 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://120.55.38.133:8000",
+        changeOrigin: true,
+      },
+    },
+  },
 });

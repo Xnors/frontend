@@ -29,148 +29,298 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="login-container">
-    <div class="login-card">
-      <h1>工作室订单管理系统</h1>
-      <h2>登录</h2>
-      <form @submit.prevent="handleLogin">
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- Logo区域 -->
+      <div class="auth-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0 0-2-2h-3a2 2 0 0 0 0-2 2v14a2 2 0 0 0 0 2 2h3a2 2 0 0 0 0 2-2z"></path>
+          </svg>
+        </div>
+        <h1 class="auth-title">欢迎回来</h1>
+        <p class="auth-subtitle">登录到工作室订单管理系统</p>
+      </div>
+
+      <!-- 登录表单 -->
+      <form @submit.prevent="handleLogin" class="auth-form">
         <div class="form-group">
-          <label for="username">用户名</label>
+          <label for="username">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0 0-4-4H8a4 4 0 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            用户名
+          </label>
           <input
             id="username"
             v-model="formData.username"
             type="text"
             required
             placeholder="请输入用户名"
+            autocomplete="username"
           />
         </div>
+
         <div class="form-group">
-          <label for="password">密码</label>
+          <label for="password">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            密码
+          </label>
           <input
             id="password"
             v-model="formData.password"
             type="password"
             required
             placeholder="请输入密码"
+            autocomplete="current-password"
           />
         </div>
-        <div v-if="error" class="error-message">{{ error }}</div>
-        <button type="submit" :disabled="loading">
-          {{ loading ? "登录中..." : "登录" }}
+
+        <div v-if="error" class="error-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ error }}
+        </div>
+
+        <button type="submit" class="btn-submit" :disabled="loading">
+          <svg v-if="loading" class="loading-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+          </svg>
+          <span v-else>登录</span>
         </button>
       </form>
-      <div class="register-link">
-        还没有账号？<router-link to="/register">立即注册</router-link>
+
+      <!-- 注册链接 -->
+      <div class="auth-footer">
+        还没有账号？
+        <router-link to="/register" class="link">
+          立即注册
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.login-container {
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
+.auth-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  padding: $spacing-lg;
 }
 
-.login-card {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+.auth-card {
+  background: $bg-primary;
+  padding: $spacing-2xl;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  animation: slideUp 0.4s ease-out;
 }
 
-h1 {
+.auth-header {
   text-align: center;
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 24px;
+  margin-bottom: $spacing-2xl;
 }
 
-h2 {
-  text-align: center;
-  color: #666;
-  margin-bottom: 30px;
-  font-size: 20px;
-  font-weight: normal;
+.logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto $spacing-lg;
+  background: linear-gradient(135deg, $primary-color, $primary-hover);
+  border-radius: $radius-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: $shadow-md;
+
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.auth-title {
+  font-size: $font-size-3xl;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.auth-subtitle {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #333;
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $text-primary;
   font-weight: 500;
+  font-size: $font-size-base;
+
+  svg {
+    color: $text-tertiary;
+  }
 }
 
-input {
+.form-group input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
+  padding: $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  transition: $transition-base;
+  font-family: inherit;
 
-input:focus {
-  outline: none;
-  border-color: #667eea;
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-tertiary;
+  }
 }
 
 .error-message {
-  color: #ef4444;
-  background: #fef2f2;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: rgba($danger-color, 0.1);
+  border: 1px solid rgba($danger-color, 0.2);
+  border-radius: $radius-md;
+  color: $danger-color;
+  font-size: $font-size-sm;
+
+  svg {
+    flex-shrink: 0;
+  }
 }
 
-button {
+.btn-submit {
   width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: $spacing-md;
+  background: linear-gradient(135deg, $primary-color, $primary-hover);
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
+  border-radius: $radius-md;
+  font-size: $font-size-lg;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: $transition-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  box-shadow: $shadow-md;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+.loading-icon {
+  animation: spin 1s linear infinite;
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.register-link {
+.auth-footer {
   text-align: center;
-  margin-top: 20px;
-  color: #666;
-  font-size: 14px;
+  margin-top: $spacing-xl;
+  color: $text-secondary;
+  font-size: $font-size-base;
 }
 
-.register-link a {
-  color: #667eea;
+.link {
+  color: $primary-color;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  transition: $transition-base;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    transition: transform 0.2s;
+  }
+
+  &:hover svg {
+    transform: translateX(4px);
+  }
 }
 
-.register-link a:hover {
-  text-decoration: underline;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

@@ -1,0 +1,233 @@
+@import './variables.scss';
+
+// 重置样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $text-primary;
+  background-color: $bg-secondary;
+}
+
+// 按钮样式
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-weight: 500;
+  font-size: $font-size-base;
+  cursor: pointer;
+  transition: $transition-base;
+  border: none;
+  outline: none;
+  gap: $spacing-sm;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  color: white;
+
+  &:hover {
+    background-color: $primary-hover;
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-secondary {
+  background-color: white;
+  color: $text-primary;
+  border: 1px solid $border-color;
+
+  &:hover {
+    border-color: $border-hover;
+    background-color: $bg-secondary;
+  }
+}
+
+.btn-success {
+  background-color: $success-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($success-color, 10%);
+  }
+}
+
+.btn-danger {
+  background-color: $danger-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($danger-color, 10%);
+  }
+}
+
+// 表单样式
+.form-group {
+  margin-bottom: $spacing-lg;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    transition: $transition-base;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    &:disabled {
+      background-color: $bg-tertiary;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+// 卡片样式
+.card {
+  background-color: $bg-primary;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $spacing-lg;
+  transition: $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+// 模态框样式
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-lg;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content {
+  background-color: $bg-primary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+  padding: $spacing-xl;
+
+  h2 {
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-2xl;
+    color: $text-primary;
+  }
+
+  h3 {
+    margin: $spacing-lg 0 $spacing-md;
+    font-size: $font-size-xl;
+    color: $text-primary;
+  }
+
+  h4 {
+    margin: $spacing-md 0 $spacing-sm;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 徽章样式
+.badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: $success-color;
+}
+
+.badge-warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: $warning-color;
+}
+
+.badge-danger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: $danger-color;
+}
+
+.badge-info {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: $info-color;
+}

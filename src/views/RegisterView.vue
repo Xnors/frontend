@@ -34,7 +34,7 @@ const handleRegister = async () => {
       username: formData.value.username,
       password: formData.value.password,
     });
-    router.push("/login");
+    router.push("/#/login");
   } catch (err) {
     error.value = err.message;
   } finally {

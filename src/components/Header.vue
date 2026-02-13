@@ -26,7 +26,7 @@ const router = useRouter();
 
 const handleLogout = () => {
   emit("logout");
-  router.push("/login");
+  router.push("/#/login");
 };
 </script>
 

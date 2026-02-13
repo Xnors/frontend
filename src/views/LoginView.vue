@@ -128,7 +128,7 @@ const handleLogin = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
   padding: $spacing-lg;
 }
 
@@ -151,13 +151,13 @@ const handleLogin = async () => {
   width: 80px;
   height: 80px;
   margin: 0 auto $spacing-lg;
-  background: linear-gradient(135deg, $primary-color, $primary-hover);
+  background: linear-gradient(135deg, #6366f1, #818cf8);
   border-radius: $radius-xl;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: $shadow-md;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);
 
   svg {
     width: 48px;
@@ -211,11 +211,13 @@ const handleLogin = async () => {
   font-size: $font-size-base;
   transition: $transition-base;
   font-family: inherit;
+  background: $bg-tertiary;
+  color: $text-primary;
 
   &:focus {
     outline: none;
     border-color: $primary-color;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
   }
 
   &::placeholder {
@@ -242,7 +244,7 @@ const handleLogin = async () => {
 .btn-submit {
   width: 100%;
   padding: $spacing-md;
-  background: linear-gradient(135deg, $primary-color, $primary-hover);
+  background: linear-gradient(135deg, #6366f1, #818cf8);
   color: white;
   border: none;
   border-radius: $radius-md;
@@ -254,11 +256,11 @@ const handleLogin = async () => {
   align-items: center;
   justify-content: center;
   gap: $spacing-sm;
-  box-shadow: $shadow-md;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: $shadow-lg;
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
   }
 
   &:active:not(:disabled) {

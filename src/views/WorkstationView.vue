@@ -171,7 +171,7 @@ onMounted(() => {
 
 .workstation {
   min-height: 100vh;
-  background: $bg-secondary;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
 }
 
 .workstation-content {
